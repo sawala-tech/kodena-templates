@@ -2,6 +2,7 @@
   "buildKind": "static",
   "buildCommand": "npm run build",
   "outputDir": "out",
+  "seedDir": "seed",
   "supportedLocales": ["id", "en"],
   "requiredSchemas": ["site-settings", "landing"],
   "needsContactForm": true,

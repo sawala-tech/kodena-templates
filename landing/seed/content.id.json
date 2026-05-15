@@ -1,0 +1,33 @@
+{
+  "$comment": "Initial Indonesian (id) content rows. M2's seedTemplate() PUTs each one to Kontena's authoring API: PUT /projects/{projId}/content/single/{schemaSlug}?locale=id. Placeholders in {{DOUBLE_BRACES}} are substituted at provisioning time from the job config (e.g. SITE_NAME from the wizard).",
+  "site-settings": {
+    "siteName": "{{SITE_NAME}}",
+    "tagline": "Selamat datang di laman kami",
+    "footerText": "© {{SITE_NAME}}. Semua hak dilindungi."
+  },
+  "landing": {
+    "heroTitle": "Selamat datang di {{SITE_NAME}}",
+    "heroSubtitle": "Halaman ini dapat Anda sunting di Kontena. Perubahan akan tayang otomatis.",
+    "heroCtaLabel": "Hubungi Kami",
+    "heroCtaHref": "#kontak",
+    "contactSectionTitle": "Hubungi Kami",
+    "contactSectionBody": "Kirim pesan kepada kami melalui formulir di bawah ini.",
+    "features": [
+      {
+        "iconEmoji": "⚡",
+        "title": "Cepat",
+        "body": "Dimuat dalam hitungan milidetik berkat pra-render statis di edge."
+      },
+      {
+        "iconEmoji": "🌐",
+        "title": "Bilingual",
+        "body": "Sajikan situs Anda dalam Bahasa Indonesia dan Inggris dengan satu klik."
+      },
+      {
+        "iconEmoji": "✏️",
+        "title": "Mudah Disunting",
+        "body": "Edit konten di Kontena; situs Anda diperbarui otomatis dalam hitungan detik."
+      }
+    ]
+  }
+}

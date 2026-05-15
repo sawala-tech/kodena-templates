@@ -1,0 +1,51 @@
+{
+  "$comment": "Kontena schema definitions for the Landing template. M2's seedTemplate() POSTs each entry to Kontena's authoring API: POST /projects/{projId}/schemas. Field types follow Kontena's `type` enum (text, richtext, media, repeater, etc.). For repeater fields, `fields` is the nested shape.",
+  "schemas": [
+    {
+      "slug": "site-settings",
+      "displayName": "Site Settings",
+      "type": "single",
+      "localized": true,
+      "fields": [
+        { "name": "siteName",       "type": "text",     "required": true },
+        { "name": "tagline",        "type": "text" },
+        { "name": "logo",           "type": "media" },
+        { "name": "favicon",        "type": "media" },
+        { "name": "footerText",     "type": "richtext" },
+        { "name": "defaultOgImage", "type": "media" },
+        {
+          "name": "socialLinks",
+          "type": "repeater",
+          "fields": [
+            { "name": "platform", "type": "text", "required": true },
+            { "name": "url",      "type": "text", "required": true }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "landing",
+      "displayName": "Landing Page",
+      "type": "single",
+      "localized": true,
+      "fields": [
+        { "name": "heroTitle",            "type": "text" },
+        { "name": "heroSubtitle",         "type": "text" },
+        { "name": "heroImage",            "type": "media" },
+        { "name": "heroCtaLabel",         "type": "text" },
+        { "name": "heroCtaHref",          "type": "text" },
+        { "name": "contactSectionTitle",  "type": "text" },
+        { "name": "contactSectionBody",   "type": "text" },
+        {
+          "name": "features",
+          "type": "repeater",
+          "fields": [
+            { "name": "iconEmoji", "type": "text" },
+            { "name": "title",     "type": "text", "required": true },
+            { "name": "body",      "type": "text" }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -35,7 +35,28 @@ how to deploy.
       // Static templates won't propagate Kontena edits without a rebuild.
       // The builder's queue consumer respects this flag.
       rebuildOnContentChange?: boolean
+
+      // Directory (relative to the template root) containing the seed
+      // corpus consumed by M2's seedTemplate(). Layout:
+      //   <seedDir>/schemas.json        — Kontena schema definitions
+      //   <seedDir>/content.<locale>.json — initial content per locale
+      seedDir: string
     }
+
+## Seed corpus layout
+
+Each template ships its own seed corpus at `<seedDir>/`. The builder's
+`seedTemplate()` reads it and POSTs to Kontena's authoring API:
+
+- `<seedDir>/schemas.json` — list of schemas. Each schema declares its
+  `slug`, `displayName`, `type` (`'single' | 'collection'`), `localized`,
+  and `fields[]`. Field types follow Kontena's enum (`text`, `richtext`,
+  `media`, `repeater`, etc.); repeater fields nest sub-fields under
+  `fields[]`.
+- `<seedDir>/content.<locale>.json` — one file per supported locale.
+  Top-level keys are schema slugs; values are field-name → value maps.
+  Values may contain `{{PLACEHOLDER}}` tokens substituted at
+  provisioning time by the orchestrator (e.g. `{{SITE_NAME}}`).
 
 ## Build-time env vars
 
