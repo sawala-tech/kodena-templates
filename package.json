@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "name": "kodena-templates",
+  "version": "0.0.0",
+  "description": "Site templates for Kodena's Instant Page feature",
+  "workspaces": [
+    "landing",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  }
+}

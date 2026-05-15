@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting…</title>
+    <meta name="robots" content="noindex, follow">
+    <!--
+      Static export has no middleware, so `/` cannot be rewritten to the
+      default locale at the edge. This minimal redirect bounces the user
+      to `/id/` (or whatever DEFAULT_LOCALE was at build time — replaced
+      below by the builder). See Surprises & Discoveries.
+    -->
+    <meta http-equiv="refresh" content="0; url=/id/">
+    <link rel="canonical" href="/id/">
+  </head>
+  <body>
+    <p>Redirecting to <a href="/id/">/id/</a>…</p>
+  </body>
+</html>

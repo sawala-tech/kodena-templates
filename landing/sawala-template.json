@@ -1,0 +1,9 @@
+{
+  "buildKind": "static",
+  "buildCommand": "npm run build",
+  "outputDir": "out",
+  "supportedLocales": ["id", "en"],
+  "requiredSchemas": ["site-settings", "landing"],
+  "needsContactForm": true,
+  "rebuildOnContentChange": true
+}
