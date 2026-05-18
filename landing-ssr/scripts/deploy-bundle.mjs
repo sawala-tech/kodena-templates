@@ -7,7 +7,7 @@
 // Reads env vars from .env.smoke.local in this template's root (gitignored).
 // See PLAN-kodena-landing-ssr.md for the full contract.
 
-import { readFileSync, statSync, mkdirSync } from 'node:fs'
+import { readFileSync, statSync, mkdirSync, writeFileSync, copyFileSync, rmSync } from 'node:fs'
 import { readdir } from 'node:fs/promises'
 import { join, relative, resolve, dirname, extname } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -132,6 +132,11 @@ async function main() {
   const dryRun = args.includes('--dry-run')
   const apiBaseIdx = args.indexOf('--api-base')
   const apiBase = apiBaseIdx >= 0 ? args[apiBaseIdx + 1] : 'https://api.sawala.cloud'
+  const emitFolderIdx = args.indexOf('--emit-folder')
+  const emitFolder = emitFolderIdx >= 0 ? resolve(args[emitFolderIdx + 1] ?? '') : null
+  if (emitFolderIdx >= 0 && !args[emitFolderIdx + 1]) {
+    die('--emit-folder requires a destination path')
+  }
 
   // 1. Locate build output.
   try {
@@ -184,6 +189,29 @@ async function main() {
   if (workerBytes.byteLength > WORKER_MODULE_MAX_BYTES) {
     die(`bundled worker is ${workerBytes.byteLength} B; Kodena cap is ${WORKER_MODULE_MAX_BYTES} B`)
   }
+
+  // 2b. --emit-folder: write a drop-ready folder for the kodena-ui Upload Bundle tab.
+  // The UI expects the dropped folder to contain `worker.js` at the root and an
+  // `assets/` subdirectory — exactly the single-module shape Kodena accepts.
+  if (emitFolder) {
+    rmSync(emitFolder, { recursive: true, force: true })
+    mkdirSync(emitFolder, { recursive: true })
+    writeFileSync(join(emitFolder, 'worker.js'), workerBytes)
+    const fileList = await walkAssets(ASSETS_DIR)
+    for (const f of fileList) {
+      // f.path begins with '/'; relative to emitFolder/assets, strip the leading slash.
+      const dest = join(emitFolder, 'assets', f.path.replace(/^\//, ''))
+      mkdirSync(dirname(dest), { recursive: true })
+      copyFileSync(f.abs, dest)
+    }
+    const assetsTotal = fileList.reduce((n, f) => n + f.size, 0)
+    console.log(`Worker module: bundled ${formatBytes(workerBytes.byteLength)}`)
+    console.log(`Assets:        ${fileList.length} files, ${formatBytes(assetsTotal)} raw`)
+    console.log(`Emitted to:    ${emitFolder}`)
+    console.log(`\nDrop the folder above into the Kodena dashboard's "Upload Bundle" tab.`)
+    return
+  }
+
   const scriptContent = workerBytes.toString('base64')
 
   // 3. Walk and encode every asset.

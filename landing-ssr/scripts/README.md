@@ -20,5 +20,25 @@ Flags:
 
 - `--dry-run` — log the request shape without POSTing.
 - `--api-base <url>` — override the Sawala API base (defaults to `https://api.sawala.cloud`).
+- `--emit-folder <dir>` — instead of POSTing, write a drop-ready folder containing the bundled `worker.js` at the root and the `assets/` subdirectory copied as-is. The folder layout matches what the kodena-ui "Upload Bundle" tab expects. No Clerk JWT or env file needed for this mode.
 
 On success the script prints the deploy row JSON and the tenant URL. On HTTP failure it prints Kodena's error body and exits non-zero.
+
+## Drop-into-dashboard recipe
+
+Use this when you want to deploy through the Kodena dashboard's drag-and-drop UI instead of the CLI:
+
+    cd /Users/sutisnamulyana/Sawala/kodena-templates/landing-ssr
+    nvm use 22.19.0
+    set -a; source .env.smoke.local; set +a   # only needed if the template uses build-time public vars
+    npx @opennextjs/cloudflare build           # produces .open-next/
+    npm run bundle:emit                         # produces .bundle-out/
+
+Then in Firefox/Chrome:
+
+1. Open the Kodena dashboard → Scripts → your script → Deploy → "Upload Bundle".
+2. Drag the `.bundle-out/` folder from Finder into the drop zone.
+3. The UI lists one worker entry and 17 (or so) assets, with no skipped files.
+4. Fill in env vars, check `nodejs_compat`, set compatibility date `2025-04-01`, click Deploy.
+
+Why this two-step flow exists: OpenNext emits a multi-module bundle (`.open-next/worker.js` is a 2 KiB dispatcher that imports `./middleware/`, `./server-functions/`, etc.) that Kodena's single-module endpoint cannot accept as-is. `--emit-folder` runs esbuild to flatten the tree into one self-contained `worker.js`, which is what the dashboard then uploads.

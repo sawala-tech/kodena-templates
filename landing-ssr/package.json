@@ -8,6 +8,7 @@
     "build:opennext": "opennextjs-cloudflare build",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy:smoke": "node scripts/deploy-bundle.mjs",
+    "bundle:emit": "node scripts/deploy-bundle.mjs --emit-folder ./.bundle-out",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
