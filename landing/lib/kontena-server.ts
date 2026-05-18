@@ -1,4 +1,4 @@
-import { createKontenaClient, type KontenaClient } from '@kodena-templates/kontena'
+import { createKontenaClient, type KontenaClient } from '@sawala/kontena-client'
 import { loadConfig } from './config'
 
 let cached: KontenaClient | undefined

@@ -19,7 +19,6 @@ const nextConfig: NextConfig = {
   transpilePackages: [
     '@kodena-templates/ui',
     '@kodena-templates/seo',
-    '@kodena-templates/kontena',
   ],
 }
 
