@@ -1,0 +1,33 @@
+{
+  "$comment": "Initial English (en) content rows. M2's seedTemplate() PUTs each one to Kontena's authoring API: PUT /projects/{projId}/content/single/{schemaSlug}?locale=en. Placeholders in {{DOUBLE_BRACES}} are substituted at provisioning time from the job config.",
+  "site-settings": {
+    "siteName": "{{SITE_NAME}}",
+    "tagline": "Welcome to our site",
+    "footerText": "© {{SITE_NAME}}. All rights reserved."
+  },
+  "landing": {
+    "heroTitle": "Welcome to {{SITE_NAME}}",
+    "heroSubtitle": "You can edit this page in Kontena. Changes go live automatically.",
+    "heroCtaLabel": "Get in touch",
+    "heroCtaHref": "#contact",
+    "contactSectionTitle": "Get in touch",
+    "contactSectionBody": "Send us a message using the form below.",
+    "features": [
+      {
+        "iconEmoji": "⚡",
+        "title": "Fast",
+        "body": "Loads in milliseconds thanks to static pre-rendering at the edge."
+      },
+      {
+        "iconEmoji": "🌐",
+        "title": "Bilingual",
+        "body": "Serve your site in Indonesian and English with one click."
+      },
+      {
+        "iconEmoji": "✏️",
+        "title": "Easy to edit",
+        "body": "Edit content in Kontena; your site updates automatically in seconds."
+      }
+    ]
+  }
+}

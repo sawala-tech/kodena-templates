@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "landing-ssr-smoke",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-04-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "vars": {
+    "KONTENA_BASE_URL": "https://api.sawala.cloud/public/kontena",
+    "KONTENA_PROJECT_ID": "proj_REPLACE_ME",
+    "NEXT_PUBLIC_KONTENA_API_KEY": "pk_REPLACE_ME",
+    "DEFAULT_LOCALE": "id",
+    "LOCALES": "id,en",
+    "SITE_NAME": "Landing SSR Smoke",
+    "SITE_ORIGIN": "https://landing-ssr-smoke.kodena.id",
+    "NEXT_PUBLIC_FORMULIR_API_KEY": "pk_REPLACE_ME",
+    "NEXT_PUBLIC_FORMULIR_CONTACT_FORM_SLUG": "slug_REPLACE_ME"
+  }
+}

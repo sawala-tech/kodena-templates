@@ -1,0 +1,4 @@
+.env.*.local
+.open-next
+.wrangler
+last-deploy.json
