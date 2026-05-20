@@ -15,9 +15,10 @@ tags (`v0.1.0`, `v0.1.1`, …). The Kodena builder reaches the code via
 
 ## Templates
 
-| Template  | Build kind | Status   |
-|-----------|------------|----------|
-| `landing` | static     | v1       |
+| Template     | Build kind | Status   |
+|--------------|------------|----------|
+| `landing`    | static     | v1       |
+| `landing-ssr`| opennext   | smoke    |
 
 See `TEMPLATES.md` for the manifest spec each template declares.
 

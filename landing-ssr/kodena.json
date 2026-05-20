@@ -1,0 +1,21 @@
+{
+  "slug": "landing-ssr-smoke",
+  "name": "Kodena landing-ssr smoke",
+  "build": {
+    "command": "node scripts/build.mjs && node scripts/bundle-worker.mjs",
+    "runByDefault": true
+  },
+  "vars": {
+    "KONTENA_BASE_URL": "https://api.sawala.cloud/public/kontena",
+    "KONTENA_PROJECT_ID": "proj_REPLACE_ME",
+    "NEXT_PUBLIC_KONTENA_API_KEY": "pk_live_REPLACE_ME",
+    "DEFAULT_LOCALE": "id",
+    "LOCALES": "id,en",
+    "SITE_NAME": "Landing SSR Smoke",
+    "SITE_ORIGIN": "https://landing-ssr-smoke.example.kodena.id",
+    "NEXT_PUBLIC_FORMULIR_API_KEY": "pk_live_REPLACE_ME",
+    "NEXT_PUBLIC_FORMULIR_CONTACT_FORM_SLUG": "contact"
+  },
+  "compatibilityFlags": ["nodejs_compat"],
+  "compatibilityDate": "2025-10-08"
+}

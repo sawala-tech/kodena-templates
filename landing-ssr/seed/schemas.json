@@ -1,0 +1,55 @@
+{
+  "$comment": "Kontena schema definitions for the Landing template. Shape matches Kontena's POST /projects/{projId}/schemas body exactly: name + slug + type + locales + fields[]; repeater fields nest sub-fields under `subfields`. M2's seedTemplate() POSTs each entry verbatim (with `slug` set explicitly so re-seeds are idempotent by-slug).",
+  "schemas": [
+    {
+      "name": "Site Settings",
+      "slug": "site-settings",
+      "type": "single",
+      "locales": ["id", "en"],
+      "fields": [
+        { "name": "siteName",       "label": "Site Name",          "type": "text",     "required": true  },
+        { "name": "tagline",        "label": "Tagline",            "type": "text",     "required": false },
+        { "name": "logo",           "label": "Logo",               "type": "media",    "required": false },
+        { "name": "favicon",        "label": "Favicon",            "type": "media",    "required": false },
+        { "name": "footerText",     "label": "Footer Text",        "type": "richtext", "required": false },
+        { "name": "defaultOgImage", "label": "Default OG Image",   "type": "media",    "required": false },
+        {
+          "name": "socialLinks",
+          "label": "Social Links",
+          "type": "repeater",
+          "required": false,
+          "subfields": [
+            { "name": "platform", "label": "Platform", "type": "text", "required": true },
+            { "name": "url",      "label": "URL",      "type": "text", "required": true }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Landing Page",
+      "slug": "landing",
+      "type": "single",
+      "locales": ["id", "en"],
+      "fields": [
+        { "name": "heroTitle",           "label": "Hero Title",            "type": "text",  "required": false },
+        { "name": "heroSubtitle",        "label": "Hero Subtitle",         "type": "text",  "required": false },
+        { "name": "heroImage",           "label": "Hero Image",            "type": "media", "required": false },
+        { "name": "heroCtaLabel",        "label": "CTA Label",             "type": "text",  "required": false },
+        { "name": "heroCtaHref",         "label": "CTA URL",               "type": "text",  "required": false },
+        { "name": "contactSectionTitle", "label": "Contact Section Title", "type": "text",  "required": false },
+        { "name": "contactSectionBody",  "label": "Contact Section Body",  "type": "text",  "required": false },
+        {
+          "name": "features",
+          "label": "Features",
+          "type": "repeater",
+          "required": false,
+          "subfields": [
+            { "name": "iconEmoji", "label": "Icon (emoji)", "type": "text", "required": false },
+            { "name": "title",     "label": "Title",        "type": "text", "required": true  },
+            { "name": "body",      "label": "Body",         "type": "text", "required": false }
+          ]
+        }
+      ]
+    }
+  ]
+}

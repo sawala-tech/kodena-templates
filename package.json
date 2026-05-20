@@ -5,6 +5,7 @@
   "description": "Site templates for Kodena's Instant Page feature",
   "workspaces": [
     "landing",
+    "landing-ssr",
     "packages/*"
   ],
   "scripts": {
