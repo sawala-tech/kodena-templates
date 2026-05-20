@@ -9,6 +9,12 @@ import { getKontenaClient } from '@/lib/kontena-server'
 import type { SiteSettingsEntry } from '@/lib/types'
 import '../globals.css'
 
+// Force per-request SSR so Kontena edits propagate without redeploy.
+// Without this, Next.js prerenders at build time and serves cached HTML
+// with `cache-control: s-maxage=31536000` (1y edge cache, 300s stale-time).
+// See PLAN-kodena-landing-ssr.md M4 cache-mode decision.
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams(): Promise<Array<{ locale: string }>> {
   return routing.locales.map((locale) => ({ locale }))
 }

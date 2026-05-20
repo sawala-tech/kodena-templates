@@ -7,6 +7,9 @@ import { loadConfig } from '@/lib/config'
 import { getKontenaClient } from '@/lib/kontena-server'
 import type { LandingEntry, SiteSettingsEntry } from '@/lib/types'
 
+// Force per-request SSR (see app/[locale]/layout.tsx for the full rationale).
+export const dynamic = 'force-dynamic'
+
 type Props = { params: Promise<{ locale: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
