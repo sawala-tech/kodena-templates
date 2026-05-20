@@ -18,7 +18,18 @@ const nextConfig: NextConfig = {
   ],
 }
 
-initOpenNextCloudflareForDev()
+// Only initialise the OpenNext dev-bindings shim under `next dev`. The
+// helper spawns the workerd binary to mount local Cloudflare bindings,
+// which is only useful for development. Calling it during `next build`
+// (NODE_ENV=production) inside the sites-builder container — or any CI
+// box that doesn't ship the workerd platform binary — fails with
+// `ENOENT @cloudflare/workerd-<platform>/bin/workerd` because npm's
+// optional-dep selection isn't always aligned with the runtime platform.
+// Gating on NODE_ENV sidesteps that entirely; production builds never
+// need the dev-time workerd shim.
+if (process.env.NODE_ENV !== 'production') {
+  initOpenNextCloudflareForDev()
+}
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
