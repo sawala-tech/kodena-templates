@@ -15,6 +15,7 @@
   "post": [
     {
       "title": "Welcome to {{SITE_NAME}}",
+      "documentKey": "post-welcome",
       "slug": "welcome",
       "excerpt": "The first post on the {{SITE_NAME}} blog — edit or delete it in Kontena.",
       "body": "<p>This is a sample post. Edit it in Kontena; changes go live within seconds.</p><p>Add new entries to the <strong>post</strong> collection to fill out your blog.</p>",
@@ -24,6 +25,7 @@
     },
     {
       "title": "How to edit content",
+      "documentKey": "post-how-to-edit",
       "slug": "how-to-edit-content",
       "excerpt": "All text, images, and menus on this site are managed through Kontena.",
       "body": "<p>Open Kontena, pick the <strong>post</strong> or <strong>page</strong> collection, and edit. This SSR site reads content on each request, so no rebuild is needed.</p>",
@@ -35,6 +37,7 @@
   "page": [
     {
       "title": "About",
+      "documentKey": "page-about",
       "slug": "about",
       "body": "<p>This page describes {{SITE_NAME}}. Edit it in Kontena under the <strong>page</strong> collection.</p>"
     }

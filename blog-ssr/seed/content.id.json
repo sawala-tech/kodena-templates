@@ -1,5 +1,5 @@
 {
-  "$comment": "Initial Indonesian (id) content for the Blog template. Single-type schemas (site-settings, menu) map to an object; collection schemas (post, page) map to an ARRAY of entries. seedTemplate() PUTs singles to /content/single/{slug} and POSTs each collection entry to /content/collection/{slug}. {{PLACEHOLDERS}} are substituted at provisioning time (e.g. SITE_NAME).",
+  "$comment": "Initial Indonesian (id) content for the Blog template. Single-type schemas (site-settings, menu) map to an object; collection schemas (post, page) map to an ARRAY of entries. seedTemplate() PUTs singles to /content/single/{slug} and POSTs each collection entry to /content/collection/{slug}. {{PLACEHOLDERS}} are substituted at provisioning time (e.g. SITE_NAME). `documentKey` is a seed-only correlation key: the id and en rows of the same logical post/page share one documentKey (e.g. post-welcome). The seeder creates the default-locale row first, lets Kontena assign its real documentId, then links the other-locale rows to that documentId — so Kontena groups them as translations (documentId == the default-language content id).",
   "site-settings": {
     "siteName": "{{SITE_NAME}}",
     "tagline": "Cerita, kabar, dan tulisan dari {{SITE_NAME}}",
@@ -15,6 +15,7 @@
   "post": [
     {
       "title": "Selamat datang di {{SITE_NAME}}",
+      "documentKey": "post-welcome",
       "slug": "selamat-datang",
       "excerpt": "Tulisan pertama di blog {{SITE_NAME}} — sunting atau hapus lewat Kontena.",
       "body": "<p>Ini adalah tulisan contoh. Anda dapat menyuntingnya di Kontena; perubahan tayang otomatis dalam hitungan detik.</p><p>Tambahkan tulisan baru pada koleksi <strong>post</strong> untuk mengisi blog Anda.</p>",
@@ -24,6 +25,7 @@
     },
     {
       "title": "Cara menyunting konten",
+      "documentKey": "post-how-to-edit",
       "slug": "cara-menyunting-konten",
       "excerpt": "Semua teks, gambar, dan menu di situs ini dikelola lewat Kontena.",
       "body": "<p>Buka Kontena, pilih koleksi <strong>post</strong> atau <strong>page</strong>, lalu sunting. Situs SSR ini membaca konten saat halaman dimuat, jadi tidak perlu build ulang.</p>",
@@ -35,6 +37,7 @@
   "page": [
     {
       "title": "Tentang Kami",
+      "documentKey": "page-about",
       "slug": "tentang-kami",
       "body": "<p>Halaman ini menjelaskan tentang {{SITE_NAME}}. Sunting isinya di Kontena pada koleksi <strong>page</strong>.</p>"
     }
