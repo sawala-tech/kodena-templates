@@ -46,10 +46,14 @@ export interface SeoFields {
   seoNoindex?: boolean
 }
 
-/** `post` (collection) — a blog post. `title`/`slug` are surfaced by Kontena. */
+/**
+ * `post` (collection) — a blog post. `title` is a data field; `slug` and
+ * `publishedAt` are Kontena system columns read via `entry._row` (the
+ * `publishedAt` here is the convenience fallback the template reads when an
+ * entry happens to carry it in data).
+ */
 export interface PostEntry extends SeoFields {
   title?: string
-  slug?: string
   excerpt?: string
   body?: string
   cover?: MediaRef | null
@@ -58,10 +62,9 @@ export interface PostEntry extends SeoFields {
   tags?: string[]
 }
 
-/** `page` (collection) — an editor-managed static page (About, etc.). */
+/** `page` (collection) — an editor-managed static page (About, etc.). `slug` via `_row`. */
 export interface PageEntry extends SeoFields {
   title?: string
-  slug?: string
   body?: string
   cover?: MediaRef | null
 }
