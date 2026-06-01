@@ -6,6 +6,7 @@
   "workspaces": [
     "landing",
     "landing-ssr",
+    "blog-ssr",
     "packages/*"
   ],
   "scripts": {

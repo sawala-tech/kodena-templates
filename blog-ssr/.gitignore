@@ -1,0 +1,5 @@
+.env.*.local
+.open-next
+.wrangler
+.bundle-out
+last-deploy.json
