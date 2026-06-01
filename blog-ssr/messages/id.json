@@ -1,0 +1,31 @@
+{
+  "Nav": {
+    "search": "Cari",
+    "searchPlaceholder": "Cari…"
+  },
+  "Blog": {
+    "latest": "Tulisan terbaru",
+    "readMore": "Baca selengkapnya",
+    "empty": "Belum ada tulisan. Tambahkan tulisan di Kontena dan akan tampil di sini.",
+    "previous": "Sebelumnya",
+    "next": "Berikutnya",
+    "prevPost": "Tulisan sebelumnya",
+    "nextPost": "Tulisan berikutnya",
+    "adjacentAria": "Tulisan terdekat"
+  },
+  "Search": {
+    "title": "Pencarian",
+    "placeholder": "Cari tulisan atau halaman…",
+    "button": "Cari",
+    "heading": "Hasil pencarian untuk “{q}”",
+    "emptyHeading": "Cari",
+    "noResults": "Tidak ada hasil yang cocok.",
+    "readMore": "Baca selengkapnya",
+    "sectionPosts": "Tulisan",
+    "sectionPages": "Halaman"
+  },
+  "Contact": {
+    "title": "Hubungi Kami",
+    "body": "Kirim pesan kepada kami melalui formulir di bawah ini."
+  }
+}

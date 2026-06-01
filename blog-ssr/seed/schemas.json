@@ -1,0 +1,92 @@
+{
+  "$comment": "Kontena schema definitions for the Blog (SSR) template. Shape matches Kontena's POST /projects/{projId}/schemas body: name + slug + type + locales + fields[]; repeater fields nest sub-fields under `subfields`, and a repeater subfield may itself be a `repeater` (one level of menu nesting). seedTemplate() POSTs each entry verbatim with `slug` set so re-seeds are idempotent by-slug. `title`/`slug` on collection schemas are added explicitly here; if Kontena rejects duplicates because it adds them implicitly, drop them from `fields`.",
+  "schemas": [
+    {
+      "name": "Site Settings",
+      "slug": "site-settings",
+      "type": "single",
+      "locales": ["id", "en"],
+      "fields": [
+        { "name": "siteName",       "label": "Site Name",        "type": "text",     "required": true  },
+        { "name": "tagline",        "label": "Tagline",          "type": "text",     "required": false },
+        { "name": "logo",           "label": "Logo",             "type": "media",    "required": false },
+        { "name": "favicon",        "label": "Favicon",          "type": "media",    "required": false },
+        { "name": "footerText",     "label": "Footer Text",      "type": "richtext", "required": false },
+        { "name": "defaultOgImage", "label": "Default OG Image", "type": "media",    "required": false },
+        {
+          "name": "socialLinks",
+          "label": "Social Links",
+          "type": "repeater",
+          "required": false,
+          "subfields": [
+            { "name": "platform", "label": "Platform", "type": "text", "required": true },
+            { "name": "url",      "label": "URL",      "type": "text", "required": true }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Menu",
+      "slug": "menu",
+      "type": "single",
+      "locales": ["id", "en"],
+      "fields": [
+        {
+          "name": "items",
+          "label": "Menu Items",
+          "type": "repeater",
+          "required": false,
+          "subfields": [
+            { "name": "label", "label": "Label", "type": "text", "required": true  },
+            { "name": "href",  "label": "Link",  "type": "text", "required": false },
+            {
+              "name": "children",
+              "label": "Sub-items",
+              "type": "repeater",
+              "required": false,
+              "subfields": [
+                { "name": "label", "label": "Label", "type": "text", "required": true },
+                { "name": "href",  "label": "Link",  "type": "text", "required": true }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Post",
+      "slug": "post",
+      "type": "collection",
+      "locales": ["id", "en"],
+      "$comment": "title is a data field; slug + publishedAt are Kontena collection system columns (set top-level at create time), so they are NOT declared as fields here.",
+      "fields": [
+        { "name": "title",              "label": "Title",            "type": "text",        "required": true  },
+        { "name": "excerpt",            "label": "Excerpt",          "type": "text",        "required": false },
+        { "name": "body",               "label": "Body",             "type": "richtext",    "required": false },
+        { "name": "cover",              "label": "Cover Image",      "type": "media",       "required": false },
+        { "name": "author",             "label": "Author",           "type": "text",        "required": false },
+        { "name": "tags",               "label": "Tags",             "type": "multiselect", "required": false },
+        { "name": "seoMetaTitle",       "label": "SEO Meta Title",   "type": "text",        "required": false },
+        { "name": "seoMetaDescription", "label": "SEO Description",  "type": "text",        "required": false },
+        { "name": "seoOgImage",         "label": "SEO OG Image",     "type": "media",       "required": false },
+        { "name": "seoNoindex",         "label": "Hide from search", "type": "boolean",     "required": false }
+      ]
+    },
+    {
+      "name": "Page",
+      "slug": "page",
+      "type": "collection",
+      "locales": ["id", "en"],
+      "$comment": "slug is a Kontena collection system column (set top-level at create time), not declared as a field.",
+      "fields": [
+        { "name": "title",              "label": "Title",            "type": "text",     "required": true  },
+        { "name": "body",               "label": "Body",             "type": "richtext", "required": false },
+        { "name": "cover",              "label": "Cover Image",      "type": "media",    "required": false },
+        { "name": "seoMetaTitle",       "label": "SEO Meta Title",   "type": "text",     "required": false },
+        { "name": "seoMetaDescription", "label": "SEO Description",  "type": "text",     "required": false },
+        { "name": "seoOgImage",         "label": "SEO OG Image",     "type": "media",    "required": false },
+        { "name": "seoNoindex",         "label": "Hide from search", "type": "boolean",  "required": false }
+      ]
+    }
+  ]
+}

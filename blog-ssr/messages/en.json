@@ -1,0 +1,31 @@
+{
+  "Nav": {
+    "search": "Search",
+    "searchPlaceholder": "Search…"
+  },
+  "Blog": {
+    "latest": "Latest posts",
+    "readMore": "Read more",
+    "empty": "No posts yet. Add posts in Kontena and they will appear here.",
+    "previous": "Previous",
+    "next": "Next",
+    "prevPost": "Previous post",
+    "nextPost": "Next post",
+    "adjacentAria": "Adjacent posts"
+  },
+  "Search": {
+    "title": "Search",
+    "placeholder": "Search posts or pages…",
+    "button": "Search",
+    "heading": "Search results for “{q}”",
+    "emptyHeading": "Search",
+    "noResults": "No matching results.",
+    "readMore": "Read more",
+    "sectionPosts": "Posts",
+    "sectionPages": "Pages"
+  },
+  "Contact": {
+    "title": "Get in touch",
+    "body": "Send us a message using the form below."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "buildKind": "opennext",
+  "buildCommand": "npx @opennextjs/cloudflare build",
+  "outputDir": ".open-next",
+  "seedDir": "seed",
+  "supportedLocales": ["id", "en"],
+  "requiredSchemas": ["site-settings", "menu", "post", "page"],
+  "needsContactForm": true,
+  "rebuildOnContentChange": false
+}
