@@ -3,11 +3,12 @@ import Link from 'next/link'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { setRequestLocale, getTranslations } from 'next-intl/server'
 import type { ReactNode } from 'react'
-import { LocaleSwitcher, SiteFooter, type Locale as UiLocale, type SocialLink } from '@kodena-templates/ui'
+import { SiteFooter, type SocialLink } from '@kodena-templates/ui'
 import { routing } from '@/i18n/routing'
 import { loadConfig } from '@/lib/config'
 import { getKontenaClient } from '@/lib/kontena-server'
 import { MenuNav } from '@/components/MenuNav'
+import { LocaleSwitcher } from '@/components/LocaleSwitcher'
 import type { Locale } from '@/lib/config'
 import type { MenuEntry, SiteSettingsEntry } from '@/lib/types'
 import '../globals.css'
@@ -44,9 +45,6 @@ export default async function LocaleLayout({
   const socialLinks: ReadonlyArray<SocialLink> = settings?.socialLinks ?? []
   const items = menu?.items ?? []
 
-  const hrefFor: Partial<Record<UiLocale, string>> = {}
-  for (const l of config.locales) hrefFor[l] = `/${l}`
-
   return (
     <html lang={locale}>
       <body className="flex min-h-screen flex-col">
@@ -67,7 +65,7 @@ export default async function LocaleLayout({
                     className="w-40 rounded-md border border-zinc-300 px-3 py-1.5 text-sm focus:w-56 focus:outline-none focus:ring-2 focus:ring-zinc-900/10"
                   />
                 </form>
-                <LocaleSwitcher current={locale} locales={config.locales} hrefFor={hrefFor} />
+                <LocaleSwitcher current={locale} locales={config.locales} />
               </div>
             </div>
           </header>
