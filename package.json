@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "description": "Site templates for Kodena's Instant Page feature",
   "workspaces": [
+    "starter",
     "landing",
     "landing-ssr",
     "blog-ssr",
