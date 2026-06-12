@@ -1,0 +1,5 @@
+{
+  "buildKind": "static",
+  "buildCommand": "npm run build",
+  "outputDir": "out"
+}

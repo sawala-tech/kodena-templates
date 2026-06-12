@@ -1,0 +1,37 @@
+{
+  "ref": "main",
+  "templates": [
+    {
+      "slug": "starter",
+      "displayName": "Starter (no CMS)",
+      "description": "A standalone Next.js site with in-repo content. Deploys with no backend.",
+      "path": "starter",
+      "buildKind": "static",
+      "default": true
+    },
+    {
+      "slug": "landing",
+      "displayName": "Landing (static, CMS)",
+      "description": "Single-page marketing site backed by a Kontena CMS project.",
+      "path": "landing",
+      "buildKind": "static",
+      "requires": ["kontena", "formulir"]
+    },
+    {
+      "slug": "landing-ssr",
+      "displayName": "Landing (SSR, CMS)",
+      "description": "Server-rendered landing page backed by a Kontena CMS project.",
+      "path": "landing-ssr",
+      "buildKind": "opennext",
+      "requires": ["kontena", "formulir"]
+    },
+    {
+      "slug": "blog-ssr",
+      "displayName": "Blog (SSR, CMS)",
+      "description": "Server-rendered blog backed by a Kontena CMS project.",
+      "path": "blog-ssr",
+      "buildKind": "opennext",
+      "requires": ["kontena", "formulir"]
+    }
+  ]
+}

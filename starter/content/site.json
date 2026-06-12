@@ -1,0 +1,8 @@
+{
+  "title": "Your new Kodena site",
+  "tagline": "Edit content/site.json and redeploy with `kodena deploy --build`.",
+  "sections": [
+    { "heading": "Fast", "body": "Static export, served on Cloudflare's edge." },
+    { "heading": "Yours", "body": "No CMS, no accounts — just code you own." }
+  ]
+}
