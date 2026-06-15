@@ -14,11 +14,12 @@ Kodena as plain assets.
   `browseHref` (where the "Browse templates" button links), and
   `footerLinks` (a list of `{ label, href }` for the footer nav). Edit
   this to change the site's wording without touching JSX.
-- `public/` — brand images served at the site root: `logo-mark-black.png`
-  (hero + header wordmark) and `logo-mark-white.png` (dark-footer
-  wordmark).
-- `app/icon.png` — the favicon (Next's App Router emits the
-  `<link rel="icon">` automatically).
+- `public/` — brand images served at the site root: `logo-mark-black.svg`
+  (hero + header wordmark) and `logo-mark-white.svg` (dark-footer
+  wordmark). They are tiny pixel-exact SVGs, so they stay crisp at any
+  size and cost a few KB each.
+- `app/icon.svg` + `app/apple-icon.png` — the favicon and Apple
+  touch icon (Next's App Router emits the `<link>` tags automatically).
 - `app/` — the Next.js App Router pages. `app/page.tsx` is the homepage
   (hero + a decorative `npx create-kodena` terminal), `app/about/page.tsx`
   is a second route, and `app/CopyButton.tsx` is the small client
@@ -32,11 +33,11 @@ Kodena as plain assets.
 
 The hero wordmark, the green/black palette, the decorative terminal
 transcript, and the floating pixel squares are **intentionally hardcoded
-Kodena branding** — they are not driven by `site.json`. The three brand
-fonts (Space Grotesk for body, JetBrains Mono for code/labels, Pixelify
-Sans for display) load via `next/font/google`, which downloads them once
-at build time and self-hosts them into the static export, so the
-deployed site makes no runtime calls to Google.
+Kodena branding** — they are not driven by `site.json`. The two brand
+fonts (Space Grotesk for body and headings, JetBrains Mono for
+code/labels) load via `next/font/google`, which downloads them once at
+build time and self-hosts them into the static export, so the deployed
+site makes no runtime calls to Google.
 
 ## Develop locally
 

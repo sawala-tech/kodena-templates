@@ -14,7 +14,7 @@ export default function HomePage() {
 
         <div className="hero-inner">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="hero-wordmark" src="/logo-mark-black.png" alt="Kodena" />
+          <img className="hero-wordmark" src="/logo-mark-black.svg" alt="Kodena" />
 
           <p className="hero-tagline">{site.tagline}</p>
           <p className="hero-sub">{site.heroSubtitle}</p>

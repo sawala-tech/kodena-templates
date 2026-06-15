@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-import { JetBrains_Mono, Pixelify_Sans, Space_Grotesk } from 'next/font/google'
+import { JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import Link from 'next/link'
 import site from '@/content/site.json'
 import './globals.css'
@@ -17,12 +17,6 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-mono',
   display: 'swap',
 })
-const pixelifySans = Pixelify_Sans({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-display',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: site.title,
@@ -33,12 +27,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${pixelifySans.variable}`}
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <body>
         <header className="site-header">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="wordmark" src="/logo-mark-black.png" alt={site.title} />
+          <img className="wordmark" src="/logo-mark-black.svg" alt={site.title} />
           <nav className="site-nav">
             <Link href="/">Home</Link>
             <Link href="/about/">About</Link>
@@ -48,7 +42,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <footer className="site-footer">
           <div className="site-footer-top">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="wordmark" src="/logo-mark-white.png" alt={site.title} />
+            <img className="wordmark" src="/logo-mark-white.svg" alt={site.title} />
             <div className="footer-links">
               {site.footerLinks.map((link) => (
                 <a key={link.label} href={link.href}>
