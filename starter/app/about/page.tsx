@@ -7,13 +7,15 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <section className="hero">
-      <h1>About this site</h1>
-      <p className="tagline">
-        This page exists so the static export ships more than one route. Add
-        your own pages by creating directories under <code>app/</code> — each
-        one becomes a folder of pre-rendered HTML in <code>out/</code>.
-      </p>
+    <section className="grid-bg">
+      <div className="hero-inner">
+        <h1 className="hero-h1">About this site</h1>
+        <p className="hero-sub">
+          This page exists so the static export ships more than one route. Add
+          your own pages by creating directories under <code>app/</code> — each
+          one becomes a folder of pre-rendered HTML in <code>out/</code>.
+        </p>
+      </div>
     </section>
   )
 }

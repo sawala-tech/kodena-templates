@@ -1,109 +1,386 @@
+/*
+ * Kodena "Minimal" pixel theme — plain CSS, no framework.
+ * Brand fonts arrive as CSS variables (--font-body / --font-mono /
+ * --font-display) set on <html> by next/font in app/layout.tsx.
+ */
+
 :root {
-  --fg: #18181b;
-  --muted: #52525b;
-  --border: #e4e4e7;
-  --accent: #2563eb;
   --bg: #ffffff;
+  --ink: #0b0b0b;
+  --kd-accent: #19e58a;
+  --muted: #3a3a3a;
+  --muted2: #6e6e6e;
+  --muted3: #9a9a9a;
+  --term-bg: #0b0b0b;
+  --term-border: #2a2a2a;
+  --term-fg: #e7e7e7;
+  --border-w: 1.5px;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  color: var(--fg);
   background: var(--bg);
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    sans-serif;
-  line-height: 1.6;
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--ink);
+  color: #fff;
 }
 
 a {
-  color: var(--accent);
+  color: inherit;
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
 code {
-  background: #f4f4f5;
-  border-radius: 4px;
+  font-family: var(--font-mono), monospace;
+  background: #0b0b0b0d;
   padding: 0.1em 0.35em;
   font-size: 0.9em;
 }
+
+@keyframes kd-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes kd-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* ------------------------------------------------------------------ shell */
 
 .site-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 64rem;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--border);
+  padding: 18px clamp(20px, 5vw, 48px);
 }
 
-.site-name {
-  font-weight: 700;
+.site-header .wordmark {
+  height: 22px;
+  width: auto;
+  display: block;
+  image-rendering: pixelated;
 }
 
 .site-nav {
   display: flex;
-  gap: 1rem;
+  gap: 24px;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.site-main {
-  max-width: 64rem;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
-}
-
-.hero h1 {
-  font-size: 2.5rem;
-  line-height: 1.15;
-  margin: 0 0 0.75rem;
-}
-
-.tagline {
+.site-nav a {
   color: var(--muted);
-  font-size: 1.125rem;
-  margin: 0;
+  transition: color 0.15s;
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: 1rem;
-  margin-top: 2.5rem;
+.site-nav a:hover {
+  color: var(--kd-accent);
 }
 
-.card {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1.25rem;
-}
-
-.card h2 {
-  margin: 0 0 0.5rem;
-  font-size: 1.125rem;
-}
-
-.card p {
-  margin: 0;
-  color: var(--muted);
-}
+/* dark footer */
 
 .site-footer {
-  max-width: 64rem;
+  background: var(--ink);
+  color: #f5f5f4;
+}
+
+.site-footer-top {
+  max-width: 980px;
   margin: 0 auto;
-  padding: 1.5rem;
-  border-top: 1px solid var(--border);
+  padding: clamp(40px, 5vw, 60px) clamp(20px, 5vw, 48px) 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.site-footer-top .wordmark {
+  height: 26px;
+  width: auto;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.footer-links a {
+  color: #d8d8d8;
+  transition: color 0.15s;
+}
+
+.footer-links a:hover {
+  color: var(--kd-accent);
+}
+
+.site-footer-spacer {
+  height: clamp(36px, 5vw, 56px);
+}
+
+.site-footer-bottom {
+  border-top: var(--border-w) solid var(--term-border);
+}
+
+.site-footer-bottom-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px clamp(20px, 5vw, 48px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 14px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted2);
+  text-transform: uppercase;
+}
+
+/* -------------------------------------------------------------------- hero */
+
+.grid-bg {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(#0b0b0b08 1px, transparent 1px),
+    linear-gradient(90deg, #0b0b0b08 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: clamp(56px, 8vw, 104px) clamp(20px, 5vw, 48px) clamp(40px, 5vw, 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-wordmark {
+  width: min(460px, 78%);
+  height: auto;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.hero-h1 {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-weight: 700;
+  font-size: clamp(34px, 6vw, 56px);
+  line-height: 1.05;
+  margin: 0;
+}
+
+.hero-tagline {
+  font-family: var(--font-body), sans-serif;
+  font-weight: 500;
+  font-size: clamp(18px, 2.6vw, 27px);
+  line-height: 1.3;
   color: var(--muted);
-  font-size: 0.875rem;
+  margin: clamp(26px, 3.5vw, 40px) 0 0;
+  max-width: 30ch;
+}
+
+.hero-sub {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--muted2);
+  max-width: 520px;
+  margin: 16px 0 0;
+}
+
+.pixel {
+  position: absolute;
+  background: var(--kd-accent);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 38px;
+}
+
+/* install chip */
+
+.install-chip {
+  display: flex;
+  align-items: stretch;
+  border: var(--border-w) solid var(--ink);
+  background: var(--ink);
+}
+
+.install-chip .cmd {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 18px;
+  font-family: var(--font-mono), monospace;
+  font-size: 15px;
+  color: #f5f5f4;
+}
+
+.install-chip .cmd .dollar {
+  color: var(--kd-accent);
+}
+
+.copy-btn {
+  cursor: pointer;
+  border: none;
+  border-left: var(--border-w) solid var(--ink);
+  background: var(--kd-accent);
+  color: var(--ink);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  padding: 0 16px;
+  min-width: 88px;
+}
+
+.copy-btn:hover {
+  filter: brightness(1.08);
+}
+
+/* ghost button */
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono), monospace;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border: var(--border-w) solid var(--ink);
+  padding: 0 22px;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.btn-ghost:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* ---------------------------------------------------------------- terminal */
+
+.terminal-section {
+  background: var(--bg);
+  border-bottom: var(--border-w) solid var(--ink);
+}
+
+.terminal-section-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 48px) clamp(56px, 7vw, 88px);
+}
+
+.terminal {
+  border: var(--border-w) solid var(--ink);
+  background: var(--term-bg);
+  box-shadow: 14px 14px 0 #0b0b0b1a;
+}
+
+.terminal-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 16px;
+  border-bottom: var(--border-w) solid var(--term-border);
+}
+
+.terminal-dot {
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+}
+
+.terminal-title {
+  margin-left: 12px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--muted2);
+  text-transform: uppercase;
+}
+
+.terminal-body {
+  padding: 24px clamp(18px, 3vw, 30px);
+  font-family: var(--font-mono), monospace;
+  font-size: 14px;
+  line-height: 1.9;
+  text-align: left;
+  color: var(--term-fg);
+  overflow-x: auto;
+}
+
+.terminal-body .ok {
+  color: var(--kd-accent);
+}
+
+.terminal-body .dim {
+  color: var(--muted3);
+}
+
+.terminal-body .dimmer {
+  color: var(--muted2);
+}
+
+.terminal-body .bright {
+  color: #f5f5f4;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 9px;
+  height: 17px;
+  background: var(--kd-accent);
+  vertical-align: -3px;
+  animation: kd-blink 1s steps(1) infinite;
 }
