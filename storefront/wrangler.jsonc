@@ -6,7 +6,11 @@
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": ".open-next/assets",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    // REQUIRED on Kodena: worker-bundle deploys run the worker first and the asset
+    // layer never pre-serves, so without this every /_next/static/* 404s (unstyled,
+    // no hydration). OpenNext bakes __ASSETS_RUN_WORKER_FIRST__ from this at build.
+    "run_worker_first": true
   },
   "vars": {
     "API_BASE_URL": "https://api.sawala.cloud",
