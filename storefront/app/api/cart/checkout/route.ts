@@ -13,7 +13,10 @@ export async function POST(req: Request) {
   const body = (await req.json().catch(() => null)) as { buyer?: GuestBuyer } | null
   if (!body?.buyer?.email) return NextResponse.json({ error: 'EMAIL_REQUIRED' }, { status: 400 })
   try {
-    const result = await checkout(config, session.cartId, session.cartToken, body.buyer)
+    // Absolute thank-you URL derived from this request's own origin, so Xendit
+    // sends the shopper straight back to this shop after a successful payment.
+    const returnUrl = `${new URL(req.url).origin}/thank-you`
+    const result = await checkout(config, session.cartId, session.cartToken, body.buyer, returnUrl)
     await setOrderSession(result.orderId, result.orderToken)
     await clearCartSession()
     return NextResponse.json({ orderId: result.orderId, checkoutUrl: result.checkoutUrl })
