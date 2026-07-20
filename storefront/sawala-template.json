@@ -1,0 +1,6 @@
+{
+  "buildKind": "opennext",
+  "buildCommand": "node scripts/build.mjs && node scripts/bundle-worker.mjs",
+  "outputDir": ".open-next",
+  "supportedLocales": ["id"]
+}

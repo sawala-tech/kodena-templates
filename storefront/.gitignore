@@ -1,0 +1,11 @@
+.env.*.local
+.open-next
+.wrangler
+.bundle-out
+last-deploy.json
+
+node_modules
+.next
+.env.local
+tsconfig.tsbuildinfo
+.wrangler-dump

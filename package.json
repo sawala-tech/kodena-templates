@@ -8,6 +8,7 @@
     "landing",
     "landing-ssr",
     "blog-ssr",
+    "storefront",
     "packages/*"
   ],
   "scripts": {
