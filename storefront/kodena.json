@@ -1,0 +1,17 @@
+{
+  "slug": "storefront-demo",
+  "name": "Kiosna storefront (reference)",
+  "build": {
+    "command": "node scripts/build.mjs && node scripts/bundle-worker.mjs",
+    "runByDefault": true
+  },
+  "vars": {
+    "API_BASE_URL": "https://api.sawala.cloud",
+    "NEXT_PUBLIC_STOREFRONT_SLUG": "sawala-test-store",
+    "KIOSNA_PUBLISHABLE_KEY": "pk_live_REPLACE_ME",
+    "NEXT_PUBLIC_SITE_NAME": "Sawala Test Store",
+    "NEXT_PUBLIC_CURRENCY": "IDR"
+  },
+  "compatibilityFlags": ["nodejs_compat"],
+  "compatibilityDate": "2025-10-08"
+}
