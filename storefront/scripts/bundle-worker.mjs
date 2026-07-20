@@ -15,7 +15,7 @@
 // /Users/sutisnamulyana/Sawala/kodena-coba-deploy/blank-ssr/scripts/bundle-worker.mjs
 // and PLAN-kodena-blank-ssr.md for the discovery sequence.
 
-import { copyFileSync, existsSync, rmSync, statSync } from 'node:fs'
+import { copyFileSync, existsSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -23,6 +23,7 @@ import { fileURLToPath } from 'node:url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PROJECT_ROOT = resolve(__dirname, '..')
 const WORKER_PATH = join(PROJECT_ROOT, '.open-next', 'worker.js')
+const ENTRY_PATH = join(PROJECT_ROOT, '.open-next', 'worker.entry.mjs')
 const DUMP_DIR = join(PROJECT_ROOT, '.wrangler-dump')
 const DUMP_WORKER = join(DUMP_DIR, 'worker.js')
 
@@ -32,6 +33,53 @@ if (!existsSync(WORKER_PATH)) {
   console.error(`bundle-worker: ${WORKER_PATH} missing — run \`npx @opennextjs/cloudflare build\` first.`)
   process.exit(1)
 }
+
+// ── Content-Type backfill shim ───────────────────────────────────────────────
+// Kodena's worker-bundle asset layer serves every static file (CSS/JS/fonts/
+// images AND favicon.ico) with NO Content-Type header. Most browsers sniff the
+// type from request context, but Safari refuses to apply a favicon that lacks an
+// image MIME type — so the icon silently never updates. We wrap the OpenNext
+// worker entry so any asset response with a missing Content-Type gets one
+// backfilled from its file extension. `run_worker_first: true` (wrangler.jsonc)
+// guarantees this wrapper runs for every asset request. `export *` re-exports the
+// OpenNext Durable Object classes (DOQueueHandler, DOShardedTagCache, …) intact.
+const SHIM = `import __oneworker from './worker.entry.mjs'
+export * from './worker.entry.mjs'
+const __MIME = {
+  '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
+  '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8',
+  '.map': 'application/json; charset=utf-8', '.ico': 'image/x-icon',
+  '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.webp': 'image/webp',
+  '.avif': 'image/avif', '.woff2': 'font/woff2', '.woff': 'font/woff',
+  '.ttf': 'font/ttf', '.otf': 'font/otf', '.eot': 'application/vnd.ms-fontobject',
+  '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml; charset=utf-8',
+  '.webmanifest': 'application/manifest+json', '.wasm': 'application/wasm',
+}
+function __extType(pathname) {
+  const m = pathname.match(/(\\.[a-z0-9]+)$/i)
+  return m ? __MIME[m[1].toLowerCase()] : undefined
+}
+export default {
+  async fetch(request, env, ctx) {
+    const res = await __oneworker.fetch(request, env, ctx)
+    try {
+      if (res && !res.headers.get('content-type')) {
+        const type = __extType(new URL(request.url).pathname)
+        if (type) {
+          const headers = new Headers(res.headers)
+          headers.set('content-type', type)
+          return new Response(res.body, { status: res.status, statusText: res.statusText, headers })
+        }
+      }
+    } catch {}
+    return res
+  },
+}
+`
+rmSync(ENTRY_PATH, { force: true })
+copyFileSync(WORKER_PATH, ENTRY_PATH)
+writeFileSync(WORKER_PATH, SHIM)
 
 rmSync(DUMP_DIR, { recursive: true, force: true })
 
