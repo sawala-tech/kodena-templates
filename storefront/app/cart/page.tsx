@@ -13,10 +13,15 @@ export default function CartPage() {
 
   const load = useCallback(async () => {
     setLoading(true)
-    const res = await fetch('/api/cart', { cache: 'no-store' })
-    const data = (await res.json()) as CartView | { empty: true }
-    if ('empty' in data) { setEmpty(true); setCart(null) } else { setEmpty(false); setCart(data) }
-    setLoading(false)
+    try {
+      const res = await fetch('/api/cart', { cache: 'no-store' })
+      const data = (await res.json()) as CartView | { empty: true }
+      if ('empty' in data) { setEmpty(true); setCart(null) } else { setEmpty(false); setCart(data) }
+    } catch {
+      setEmpty(true); setCart(null)
+    } finally {
+      setLoading(false)
+    }
   }, [])
 
   useEffect(() => { load() }, [load])
