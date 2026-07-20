@@ -32,6 +32,14 @@
       "path": "blog-ssr",
       "buildKind": "opennext",
       "requires": ["kontena", "formulir"]
+    },
+    {
+      "slug": "storefront",
+      "displayName": "Storefront (Kiosna Display)",
+      "description": "A fork-able Next.js shop that consumes the Kiosna Display + Pay public API.",
+      "path": "storefront",
+      "buildKind": "opennext",
+      "requires": ["kiosna-display"]
     }
   ]
 }
