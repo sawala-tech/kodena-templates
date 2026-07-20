@@ -187,8 +187,20 @@ export function selectShipping(
 }
 
 // ── Checkout + order ─────────────────────────────────────────────────────────
-export function checkout(config: StorefrontConfig, cartId: string, cartToken: string, buyer: GuestBuyer): Promise<CheckoutResult> {
-  return request<CheckoutResult>(config, `/carts/${cartId}/checkout`, { method: 'POST', body: JSON.stringify({ buyer }), cartToken })
+export function checkout(
+  config: StorefrontConfig,
+  cartId: string,
+  cartToken: string,
+  buyer: GuestBuyer,
+  // Absolute https URL the hosted payment page redirects to after a successful
+  // payment (this shop's /thank-you). Omitted → Xendit shows its own success page.
+  returnUrl?: string,
+): Promise<CheckoutResult> {
+  return request<CheckoutResult>(config, `/carts/${cartId}/checkout`, {
+    method: 'POST',
+    body: JSON.stringify({ buyer, ...(returnUrl ? { returnUrl } : {}) }),
+    cartToken,
+  })
 }
 export function getOrder(config: StorefrontConfig, orderId: string, orderToken: string): Promise<OrderView> {
   return request<OrderView>(config, `/orders/${orderId}`, { orderToken })
